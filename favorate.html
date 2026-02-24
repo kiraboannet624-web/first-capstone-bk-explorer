@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Explorer | Favorites</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-800">
+  <nav class="sticky top-0 z-50 bg-white shadow-sm">
+    <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="index.html" class="text-xl font-bold text-sky-700">Book Explorer</a>
+      <div class="flex items-center gap-4 text-sm font-medium sm:text-base">
+        <a href="index.html" class="text-slate-600 hover:text-sky-700">Home</a>
+        <a href="favorate.html" class="text-sky-700">Favorites</a>
+        <a href="about.html" class="text-slate-600 hover:text-sky-700">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mb-6 flex items-center justify-between gap-3">
+      <h1 class="text-2xl font-semibold">Your Favorites</h1>
+      <p id="favorites-count" class="text-sm text-slate-600">0 favorite book(s)</p>
+    </div>
+
+    <div id="empty-favorites" class="hidden rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+      No favorites yet. Browse books on the home page and add some.
+    </div>
+
+    <section id="favorites-grid" class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-live="polite"></section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-4 text-center text-sm text-slate-500">
+    Favorites are saved in localStorage and persist after refresh.
+  </footer>
+
+  <script type="module" src="./favorites-page.js"></script>
+</body>
+</html>
