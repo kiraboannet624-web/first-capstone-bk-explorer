@@ -14,3 +14,10 @@ function mapBook(doc) {
     cover,
   };
 }
+
+export async function fetchBooks(query = "bestsellers", limit = 16) {
+  const url = `${API_BASE}?q=${encodeURIComponent(query)}&limit=${limit}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Failed to fetch books");
+  }
