@@ -1,4 +1,4 @@
-import { isFavorite } from "./favorites.js";
+import { isFavorite } from "./favorates.js";
 
 export function createBookCard(book, showFavoriteAction = true) {
   const article = document.createElement("article");

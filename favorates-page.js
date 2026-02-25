@@ -1,27 +1,31 @@
-const API_BASE = "https://openlibrary.org/search.json";
+import { getFavorites, toggleFavorite } from "./favorates.js";
+import { renderBooks } from "./ui.js";
 
-function mapBook(doc) {
-  const author = doc.author_name?.[0] || "Unknown Author";
-  const cover = doc.cover_i
-    ? `https://covers.openlibrary.org/b/id/${doc.cover_i}-M.jpg`
-    : "https://placehold.co/260x380/e2e8f0/475569?text=No+Cover";
+const favoritesGrid = document.getElementById("favorites-grid");
+const favoritesCount = document.getElementById("favorites-count");
+const emptyFavorites = document.getElementById("empty-favorites");
 
-  return {
-    key: doc.key,
-    title: doc.title || "Untitled",
-    author,
-    year: doc.first_publish_year || "N/A",
-    cover,
-  };
+function renderFavorites() {
+  const favorites = getFavorites();
+  renderBooks(favoritesGrid, favorites, true);
+  favoritesCount.textContent = `${favorites.length} favorite book(s)`;
+  emptyFavorites.classList.toggle("hidden", favorites.length > 0);
 }
 
-export async function fetchBooks(query = "bestsellers", limit = 16) {
-  const url = `${API_BASE}?q=${encodeURIComponent(query)}&limit=${limit}`;
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error("Failed to fetch books");
-  }
+favoritesGrid.addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-action='favorite']");
+  if (!button) return;
 
-  const data = await response.json();
-  return (data.docs || []).map(mapBook);
-}
+  const card = button.closest("article[data-book-key]");
+  const key = card?.dataset.bookKey;
+  if (!key) return;
+
+  const favorites = getFavorites();
+  const book = favorites.find((item) => item.key === key);
+  if (!book) return;
+
+  toggleFavorite(book);
+  renderFavorites();
+});
+
+renderFavorites();

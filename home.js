@@ -1,5 +1,5 @@
 import { fetchBooks } from "./fetchBooks.js";
-import { getFavorites, toggleFavorite } from "./favorites.js";
+import { getFavorites, toggleFavorite } from "./favorates.js";
 import { renderBooks } from "./ui.js";
 
 const form = document.getElementById("search-form");
