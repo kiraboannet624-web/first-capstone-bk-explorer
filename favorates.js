@@ -23,3 +23,14 @@ export function addFavorite(book) {
   saveFavorites(updated);
   return updated;
 }
+
+export function removeFavorite(bookKey) {
+  const favorites = getFavorites();
+  const updated = favorites.filter((book) => book.key !== bookKey);
+  saveFavorites(updated);
+  return updated;
+}
+
+export function toggleFavorite(book) {
+  return isFavorite(book.key) ? removeFavorite(book.key) : addFavorite(book);
+}
