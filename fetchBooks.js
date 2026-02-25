@@ -21,3 +21,6 @@ export async function fetchBooks(query = "bestsellers", limit = 16) {
   if (!response.ok) {
     throw new Error("Failed to fetch books");
   }
+  const data = await response.json();
+  return (data.docs || []).map(mapBook);
+}
