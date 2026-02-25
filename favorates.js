@@ -11,3 +11,15 @@ export function getFavorites() {
 function saveFavorites(favorites) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
 }
+export function isFavorite(bookKey) {
+  return getFavorites().some((book) => book.key === bookKey);
+}
+
+export function addFavorite(book) {
+  const favorites = getFavorites();
+  if (favorites.some((item) => item.key === book.key)) return favorites;
+
+  const updated = favorites.concat(book);
+  saveFavorites(updated);
+  return updated;
+}
