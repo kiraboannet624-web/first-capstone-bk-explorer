@@ -15,7 +15,7 @@ function mapBook(doc) {
   };
 }
 
-export async function fetchBooks(query = "bestsellers", limit = 16) {
+export async function fetchBooks(query = "bestsellers", limit = 9) {
   const url = `${API_BASE}?q=${encodeURIComponent(query)}&limit=${limit}`;
   const response = await fetch(url);
   if (!response.ok) {
